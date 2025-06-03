@@ -24,14 +24,16 @@ const MultiStepForm = () => {
       email: "",
       phoneNumber: "",
       plan: undefined,
-      billing: undefined,
+      billing: "monthly",
       addons: [],
     },
   });
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     console.log("FINAL SUBMIT", values);
-    toast.success("Order confirmed. Check console for details.");
+    toast.success("Order confirmed. Check console for details.", {
+      position: "top-center",
+    });
     setIsComplete(true);
   };
 
@@ -98,7 +100,10 @@ const MultiStepForm = () => {
                 {currentStep === 2 && <StepTwo />}
                 {currentStep === 3 && <StepThree />}
                 {currentStep === 4 && (
-                  <StepFour setCurrentStep={setCurrentStep} />
+                  <StepFour
+                    setCurrentStep={setCurrentStep}
+                    setProgress={setProgress}
+                  />
                 )}
               </motion.div>
             </AnimatePresence>

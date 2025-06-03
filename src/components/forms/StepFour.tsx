@@ -1,6 +1,6 @@
 import { useFormContext } from "react-hook-form";
 
-const StepFour = ({ setCurrentStep }) => {
+const StepFour = ({ setCurrentStep, setProgress }) => {
   const form = useFormContext();
   const values = form.getValues();
 
@@ -45,8 +45,8 @@ const StepFour = ({ setCurrentStep }) => {
             </p>
             <button
               type="button"
-              className="text-primary underline text-sm mt-1"
-              onClick={() => setCurrentStep(2)}
+              className="text-primary underline text-sm mt-1 cursor-pointer"
+              onClick={() => {setCurrentStep(2); setProgress(33)}}
             >
               Change
             </button>
