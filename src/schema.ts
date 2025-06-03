@@ -10,8 +10,3 @@ export const formSchema = z.object({
     z.enum(["onlineService", "largerStorage", "customisableProfile"])
   ),
 });
-
-//step 1 - name, email, phone number
-//step 2 - arcade, advanced, pro, toggle (monthly/yearly)
-//step 3 - online service, larger storage, customisable profile
-//step 4 - displays totals

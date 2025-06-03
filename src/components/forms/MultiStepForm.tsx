@@ -8,6 +8,8 @@ import StepTwo from "./StepTwo";
 import StepThree from "./StepThree";
 import StepFour from "./StepFour";
 import { Progress } from "../ui/progress";
+import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 const MultiStepForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -27,6 +29,7 @@ const MultiStepForm = () => {
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     console.log("FINAL SUBMIT", values);
+    toast.success("Order confirmed. Check console for details.");
   };
 
   const handleNext = async () => {
@@ -59,33 +62,33 @@ const MultiStepForm = () => {
   };
 
   return (
-    <>
-      <Progress value={progress} />
+    <div className="mx-auto max-w-xl p-6 sm:p-8 md:p-10 lg:p-12">
+      <Progress value={progress} className="mb-6" />
       <FormProvider {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           {currentStep === 1 && <StepOne />}
           {currentStep === 2 && <StepTwo />}
           {currentStep === 3 && <StepThree />}
-          {currentStep === 4 && <StepFour />}
+          {currentStep === 4 && <StepFour setCurrentStep={setCurrentStep} />}
 
           <div className="flex justify-between mt-8">
             {currentStep > 1 && (
-              <button type="button" onClick={handleBack}>
-                Back
-              </button>
+              <Button type="button" variant="outline" onClick={handleBack}>
+                Go Back
+              </Button>
             )}
 
             {currentStep < 4 && (
-              <button type="button" onClick={handleNext}>
-                Next
-              </button>
+              <Button type="button" onClick={handleNext}>
+                Next Step
+              </Button>
             )}
 
-            {currentStep === 4 && <button type="submit">Confirm</button>}
+            {currentStep === 4 && <Button type="submit">Confirm</Button>}
           </div>
         </form>
       </FormProvider>
-    </>
+    </div>
   );
 };
 

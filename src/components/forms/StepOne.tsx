@@ -12,7 +12,8 @@ const StepOne = () => {
   const form = useFormContext();
 
   return (
-    <>
+    <div className="space-y-6">
+      <h2 className="text-2xl font-bold mb-4">Personal Info</h2>
       <FormField
         control={form.control}
         name="name"
@@ -52,7 +53,7 @@ const StepOne = () => {
           </FormItem>
         )}
       />
-    </>
+    </div>
   );
 };
 
