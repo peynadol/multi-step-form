@@ -9,30 +9,39 @@ import {
 } from "@/components/ui/form";
 import { useFormContext } from "react-hook-form";
 import clsx from "clsx";
+import { type FormData } from "@/lib/types";
+
+// 100% correctly typed addon option
+type AddonOption = {
+  value: FormData["addons"][number];
+  label: string;
+  description: string;
+  price: string;
+};
+
+const addonOptions: AddonOption[] = [
+  {
+    value: "onlineService",
+    label: "Online Service",
+    description: "Access to multiplayer games",
+    price: "+$1/mo",
+  },
+  {
+    value: "largerStorage",
+    label: "Larger Storage",
+    description: "Extra 1TB of cloud save",
+    price: "+$2/mo",
+  },
+  {
+    value: "customisableProfile",
+    label: "Customisable Profile",
+    description: "Custom theme on your profile",
+    price: "+$2/mo",
+  },
+];
 
 const StepThree = () => {
-  const form = useFormContext();
-
-  const addonOptions = [
-    {
-      value: "onlineService",
-      label: "Online Service",
-      description: "Access to multiplayer games",
-      price: "+$1/mo",
-    },
-    {
-      value: "largerStorage",
-      label: "Larger Storage",
-      description: "Extra 1TB of cloud save",
-      price: "+$2/mo",
-    },
-    {
-      value: "customisableProfile",
-      label: "Customisable Profile",
-      description: "Custom theme on your profile",
-      price: "+$2/mo",
-    },
-  ];
+  const form = useFormContext<FormData>();
 
   return (
     <div className="space-y-8">
@@ -78,7 +87,7 @@ const StepThree = () => {
                             } else {
                               form.setValue(
                                 "addons",
-                                (field.value || []).filter(
+                                (field.value ?? []).filter(
                                   (val) => val !== option.value
                                 )
                               );

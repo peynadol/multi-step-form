@@ -1,29 +1,35 @@
 import { useFormContext } from "react-hook-form";
+import { type FormData } from "@/lib/types";
 
-const StepFour = ({ setCurrentStep, setProgress }) => {
-  const form = useFormContext();
+type StepFourProps = {
+  setCurrentStep: (step: number) => void;
+  setProgress: (progress: number) => void;
+};
+
+const StepFour = ({ setCurrentStep, setProgress }: StepFourProps) => {
+  const form = useFormContext<FormData>();
   const values = form.getValues();
 
-  const planPrices = {
+  const planPrices: Record<FormData["plan"], number> = {
     Arcade: 9,
     Advanced: 12,
     Pro: 15,
   };
 
-  const addonPrices = {
+  const addonPrices: Record<FormData["addons"][number], number> = {
     onlineService: 1,
     largerStorage: 2,
     customisableProfile: 2,
   };
 
   const planPrice = planPrices[values.plan] || 0;
-  const addonsTotal = (values.addons || []).reduce(
+
+  const addonsTotal = (values.addons || []).reduce<number>(
     (total, addon) => total + (addonPrices[addon] || 0),
     0
   );
 
   const total = planPrice + addonsTotal;
-
   const displayedTotal = values.billing === "monthly" ? total : total * 12;
 
   return (
@@ -46,7 +52,10 @@ const StepFour = ({ setCurrentStep, setProgress }) => {
             <button
               type="button"
               className="text-primary underline text-sm mt-1 cursor-pointer"
-              onClick={() => {setCurrentStep(2); setProgress(33)}}
+              onClick={() => {
+                setCurrentStep(2);
+                setProgress(33);
+              }}
             >
               Change
             </button>
