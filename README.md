@@ -12,7 +12,7 @@ Includes form validation, progress tracking, and dynamic step transitions.
 - Schema validation using Zod
 - Progress indicator using Radix UI Progress
 - Accessible form elements (Radix UI components)
-- Animated transitions
+- Animated transitions using Framer Motion
 - Styled with Tailwind CSS
 - Responsive layout
 - Toast notifications using Sonner
